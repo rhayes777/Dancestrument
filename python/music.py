@@ -77,6 +77,30 @@ class Key:
     A_Sharp = 10
     B = 11
 
+    @classmethod
+    def from_string(cls, string):
+        return Key.key_dict[string]
+
+    key_dict = {
+        "C": 0,
+        "C_Sharp": 1,
+        "C#": 1,
+        "D": 2,
+        "D_Sharp": 3,
+        "D#": 3,
+        "E": 4,
+        "F": 5,
+        "F_Sharp": 6,
+        "F#": 6,
+        "G": 7,
+        "G_Sharp": 8,
+        "G#": 8,
+        "A": 9,
+        "A_Sharp": 10,
+        "A#": 10,
+        "B": 11
+    }
+
 
 # Represents a note
 class Note:
@@ -113,6 +137,17 @@ class Scale:
     minor_blues = [0, 3, 5, 6, 7, 10]
 
     all = [major, minor, minor_pentatonic, minor_blues]
+
+    @classmethod
+    def from_string(cls, string):
+        return Scale.scale_dict[string]
+
+    scale_dict = {
+        "major": major,
+        "minor": minor,
+        "minor_pentatonic": minor_pentatonic,
+        "minor_blues": minor_blues
+    }
 
     # Make a new scale with a scale passed to it (e.g. scale = Scale(minor_blues))
     def __init__(self, scale, key=Key.C, base_octave=3):

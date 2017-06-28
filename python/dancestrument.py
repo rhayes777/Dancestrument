@@ -1,12 +1,22 @@
 import dancemat
 import music
+from sys import argv
+
+key = music.Key.C
+scale = music.Scale.major
+
+for arg in argv:
+    if arg in music.Key.key_dict:
+        key = music.Key.key_dict[arg]
+    elif arg in music.Scale.scale_dict:
+        scale = music.Scale.scale_dict[arg]
 
 # Create a dancemat
 mat = dancemat.DanceMat()
 # Create a midi instrument
 instrument = music.MidiInstrument()
 # Create a scale
-scale = music.Scale(music.Scale.minor, key=music.Key.A)
+scale = music.Scale(scale, key=key)
 
 # Relate button names to positions in the scale
 position_dict = {dancemat.Button.triangle: 0,
@@ -59,6 +69,7 @@ def listener(status_dict):
             scale.change_octave(-1 if button == dancemat.Button.select else 1)
     # This is called to make changes to the instrument have effect (i.e. it sends midi messages)
     instrument.update()
+
 
 # Attach that listener function to the dancemat
 mat.set_button_listener(listener)
